@@ -7,7 +7,7 @@ export default {
   deviceName: 'WppConnect',
   poweredBy: 'WPPConnect-Server',
   startAllSession: true,
-  tokenStoreType: 'postgres',
+  tokenStoreType: 'file',
   maxListeners: 15,
 customUserDataDir: './userDataDir/', // Esto ya apuntará al mount persistente
   webhook: {
@@ -83,18 +83,21 @@ customUserDataDir: './userDataDir/', // Esto ya apuntará al mount persistente
     enable: false,
     prefix: 'tagone-',
   },
-db: {
-  postgres: {
-    enabled: true,
-    connectionString: 'postgres://postgres:carlosrr040696123@db.gnqewqtpvygnkxryyaij.supabase.co:5432/postgres',
-    tableName: 'sessions', // Puedes cambiar esto si querés otro nombre
+  db: {
+    mongodbDatabase: 'tokens',
+    mongodbCollection: '',
+    mongodbUser: '',
+    mongodbPassword: '',
+    mongodbHost: '',
+    mongoIsRemote: true,
+    mongoURLRemote: '',
+    mongodbPort: 27017,
+    redisHost: 'localhost',
+    redisPort: 6379,
+    redisPassword: '',
+    redisDb: 0,
+    redisPrefix: 'docker',
   },
-  redisHost: 'localhost',
-  redisPort: 6379,
-  redisPassword: '',
-  redisDb: 0,
-  redisPrefix: 'docker',
-},
   aws_s3: {
     region: 'sa-east-1' as any,
     access_key_id: null,

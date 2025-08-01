@@ -8,9 +8,6 @@ services:
       context: .
     volumes:
       - ./config.ts:/usr/src/wpp-server/config.ts
-      - ./wppconnect_tokens:/usr/src/wpp-server/tokens
+      - ./userDataDir:/usr/src/wpp-server/userDataDir  # cambio clave: coincide con customUserDataDir
     ports:
       - "21465:21465"
-
-volumes:
-  wppconnect_tokens: {}      

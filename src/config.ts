@@ -2,37 +2,35 @@ import { ServerOptions } from './types/ServerOptions';
 
 export default {
   secretKey: 'THISISMYSECURETOKEN',
-  host: 'http://localhost',
-  port: '21465',
+  host: 'https://mi-wppconnect.onrender.com',
+  port: '10000',
   deviceName: 'WppConnect',
   poweredBy: 'WPPConnect-Server',
-  startAllSession: true,
+  startAllSession: false,
   tokenStoreType: 'file',
-  maxListeners: 15,
-customUserDataDir: './userDataDir/', // Esto ya apuntará al mount persistente
-  webhook: {
-    url: null,
-    autoDownload: true,
-    uploadS3: false,
-    readMessage: true,
-    allUnreadOnStart: false,
-    listenAcks: true,
-    onPresenceChanged: true,
-    onParticipantsChanged: true,
-    onReactionMessage: true,
-    onPollResponse: true,
-    onRevokedMessage: true,
-    onLabelUpdated: true,
-    onSelfMessage: false,
-    ignore: ['status@broadcast'],
-  },
+  maxListeners: 100,
+  customUserDataDir: '/app/userDataDir/',
+webhook: {
+  url: null,                   // No hay URL de webhook configurada aún
+  autoDownload: true,          // Descarga automática de archivos multimedia
+  readMessage: false,           // Marca los mensajes como leídos al recibirlos
+  listenAcks: true,            // Escucha confirmaciones de lectura (ticks)
+  onPresenceChanged: false,    // ❌ No escucha cambios de presencia (por ejemplo: "escribiendo...")
+  onParticipantsChanged: false, // ❌ No escucha cambios en participantes de grupos
+  onReactionMessage: false,    // ❌ No escucha reacciones (emojis)
+  onPollResponse: false,        // ✅ Escucha respuestas a encuestas
+  onRevokedMessage: false,      // ✅ Escucha cuando un mensaje se borra para todos
+  onLabelUpdated: false,        // ✅ Escucha cambios de etiquetas
+  onSelfMessage: false,        // ❌ No procesa mensajes enviados por el propio bot
+  ignore: ['status@broadcast'] // Ignora mensajes del estado de WhatsApp
+},
   websocket: {
     autoDownload: false,
     uploadS3: false,
   },
   chatwoot: {
-    sendQrCode: true,
-    sendStatus: true,
+    sendQrCode: false,
+    sendStatus: false,
   },
   archive: {
     enable: false,
@@ -40,14 +38,13 @@ customUserDataDir: './userDataDir/', // Esto ya apuntará al mount persistente
     daysToArchive: 45,
   },
   log: {
-    level: 'silly', // Before open a issue, change level to silly and retry a action
-    logger: ['console', 'file'],
+    level: 'warn', // Before open a issue, change level to silly and retry a action
+    logger: ['console'],
   },
   createOptions: {
     browserArgs: [
       '--disable-web-security',
       '--no-sandbox',
-      '--disable-web-security',
       '--aggressive-cache-discard',
       '--disable-cache',
       '--disable-application-cache',
@@ -83,21 +80,21 @@ customUserDataDir: './userDataDir/', // Esto ya apuntará al mount persistente
     enable: false,
     prefix: 'tagone-',
   },
-db: {
-  mongodbDatabase: 'admin',
-  mongodbCollection: '', // opcional
-  mongodbUser: 'doadmin',
-  mongodbPassword: '360m8F29BXj71npE',
-  mongodbHost: 'db-mongodb-nyc1-55549-32dda95f.mongo.ondigitalocean.com',
-  mongoIsRemote: true,
-  mongoURLRemote: 'mongodb+srv://doadmin:360m8F29BXj71npE@db-mongodb-nyc1-55549-32dda95f.mongo.ondigitalocean.com/admin?retryWrites=true&w=majority',
-  mongodbPort: 27017,
-  redisHost: 'localhost',
-  redisPort: 6379,
-  redisPassword: '',
-  redisDb: 0,
-  redisPrefix: 'docker',
-},
+  db: {
+    mongodbDatabase: 'tokens',
+    mongodbCollection: '',
+    mongodbUser: '',
+    mongodbPassword: '',
+    mongodbHost: '',
+    mongoIsRemote: true,
+    mongoURLRemote: '',
+    mongodbPort: 27017,
+    redisHost: 'localhost',
+    redisPort: 6379,
+    redisPassword: '',
+    redisDb: 0,
+    redisPrefix: 'docker',
+  },
   aws_s3: {
     region: 'sa-east-1' as any,
     access_key_id: null,
